@@ -1,0 +1,218 @@
+.page {
+    padding: 1rem;
+    min-height: calc(100vh - var(--navbar-height) - 100px);
+    overflow-x: hidden;}
+
+.container {
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.backButton {
+    position: absolute;
+    left: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.backButton:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+}
+
+.title {
+    font-size: 1.75rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.scorePanel {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+[data-theme="dark"] .scorePanel {
+    border-color: rgba(255, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.1);
+}
+
+.scoreItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.scoreLabel {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.scoreValue {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neon-yellow);
+}
+
+[data-theme="dark"] .scoreValue {
+    text-shadow: 0 0 10px var(--neon-yellow);
+}
+
+.canvasWrapper {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    border: 3px solid var(--neon-yellow);
+}
+
+[data-theme="dark"] .canvasWrapper {
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+}
+
+.canvasWrapper canvas {
+    display: block;
+    cursor: pointer;
+    max-width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(5, 5, 16, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.overlayContent {
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.overlayTitle {
+    font-size: 1.75rem;
+}
+
+.instructions {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 0.875rem 2rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btnStart {
+    background: rgba(255, 255, 0, 0.1);
+    border-color: var(--neon-yellow);
+    color: var(--neon-yellow);
+}
+
+.btnStart:hover {
+    background: var(--neon-yellow);
+    color: #000;
+}
+
+.btnTutorial {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+
+.btnTutorial:hover {
+    background: var(--neon-cyan);
+    color: #000;
+}
+
+.btnRestart {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+
+.btnRestart:hover {
+    background: var(--neon-cyan);
+    color: #000;
+}
+
+.finalScore {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.finalScoreLabel {
+    color: var(--text-secondary);
+}
+
+.finalScoreValue {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--neon-yellow);
+}
+
+[data-theme="dark"] .finalScoreValue {
+    text-shadow: 0 0 20px var(--neon-yellow);
+}
+
+.hint {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .backButton {
+        position: static;
+        margin-right: auto;
+    }
+
+    .header {
+        justify-content: flex-start;
+        gap: 0.75rem;
+    }
+}

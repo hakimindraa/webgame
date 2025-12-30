@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Game Snake dengan tema neon/cyberpunk yang menarik! Mainkan di laptop atau handphone.">
+    <meta name="theme-color" content="#0a0a1a">
+    <title>🐍 Neon Snake Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1 class="game-title">
+                <span class="neon-text cyan">NEON</span>
+                <span class="neon-text magenta">SNAKE</span>
+            </h1>
+        </header>
+
+        <!-- Score Display -->
+        <div class="score-panel">
+            <div class="score-item">
+                <span class="score-label">SCORE</span>
+                <span class="score-value" id="currentScore">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">HIGH SCORE</span>
+                <span class="score-value" id="highScore">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">LEVEL</span>
+                <span class="score-value" id="currentLevel">1</span>
+            </div>
+        </div>
+
+        <!-- Active Power-up Display -->
+        <div class="powerup-status" id="powerupStatus">
+            <span class="powerup-icon" id="activePowerupIcon"></span>
+            <span class="powerup-timer" id="powerupTimer"></span>
+        </div>
+
+        <!-- Game Canvas -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- Start Screen Overlay -->
+            <div class="overlay" id="startScreen">
+                <div class="overlay-content">
+                    <h2 class="overlay-title neon-text cyan">🐍 NEON SNAKE</h2>
+                    <p class="overlay-subtitle">Pilih Level Kesulitan</p>
+                    
+                    <div class="difficulty-buttons">
+                        <button class="btn btn-easy" data-difficulty="easy">
+                            <span class="btn-icon">🌟</span>
+                            <span class="btn-text">MUDAH</span>
+                        </button>
+                        <button class="btn btn-medium" data-difficulty="medium">
+                            <span class="btn-icon">⚡</span>
+                            <span class="btn-text">SEDANG</span>
+                        </button>
+                        <button class="btn btn-hard" data-difficulty="hard">
+                            <span class="btn-icon">🔥</span>
+                            <span class="btn-text">SULIT</span>
+                        </button>
+                    </div>
+
+                    <div class="controls-info">
+                        <p>💻 Laptop: Gunakan Arrow Keys</p>
+                        <p>📱 HP: Swipe atau D-Pad</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pause Overlay -->
+            <div class="overlay hidden" id="pauseScreen">
+                <div class="overlay-content">
+                    <h2 class="overlay-title neon-text yellow">⏸️ PAUSED</h2>
+                    <button class="btn btn-resume" id="resumeBtn">
+                        <span class="btn-icon">▶️</span>
+                        <span class="btn-text">LANJUT</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Over Overlay -->
+            <div class="overlay hidden" id="gameOverScreen">
+                <div class="overlay-content">
+                    <h2 class="overlay-title neon-text magenta">💀 GAME OVER</h2>
+                    <div class="final-score">
+                        <span class="final-score-label">Skor Akhir</span>
+                        <span class="final-score-value" id="finalScore">0</span>
+                    </div>
+                    <div class="new-highscore hidden" id="newHighscore">
+                        <span class="neon-text yellow">🎉 HIGH SCORE BARU! 🎉</span>
+                    </div>
+                    <button class="btn btn-restart" id="restartBtn">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">MAIN LAGI</span>
+                    </button>
+                    <button class="btn btn-leaderboard" id="showLeaderboardBtn">
+                        <span class="btn-icon">🏆</span>
+                        <span class="btn-text">LEADERBOARD</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile D-Pad Controls -->
+        <div class="dpad-container" id="dpadControls">
+            <button class="dpad-btn dpad-up" id="dpadUp">▲</button>
+            <div class="dpad-middle">
+                <button class="dpad-btn dpad-left" id="dpadLeft">◀</button>
+                <button class="dpad-btn dpad-center">●</button>
+                <button class="dpad-btn dpad-right" id="dpadRight">▶</button>
+            </div>
+            <button class="dpad-btn dpad-down" id="dpadDown">▼</button>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button class="control-btn" id="pauseBtn" title="Pause (Space)">
+                <span>⏸️</span>
+            </button>
+            <button class="control-btn" id="soundBtn" title="Toggle Sound">
+                <span id="soundIcon">🔊</span>
+            </button>
+            <button class="control-btn" id="leaderboardBtn" title="Leaderboard">
+                <span>🏆</span>
+            </button>
+        </div>
+
+        <!-- Power-ups Legend -->
+        <div class="powerups-legend">
+            <div class="legend-item">
+                <span class="legend-icon">🚀</span>
+                <span class="legend-text">Speed Boost</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-icon">🛡️</span>
+                <span class="legend-text">Shield</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-icon">⭐</span>
+                <span class="legend-text">Double Points</span>
+            </div>
+            <div class="legend-item obstacle">
+                <span class="legend-icon">💣</span>
+                <span class="legend-text">Obstacle</span>
+            </div>
+        </div>
+
+        <!-- Leaderboard Modal -->
+        <div class="modal hidden" id="leaderboardModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="neon-text cyan">🏆 LEADERBOARD</h2>
+                    <button class="modal-close" id="closeLeaderboard">&times;</button>
+                </div>
+                <div class="leaderboard-list" id="leaderboardList">
+                    <!-- Leaderboard entries will be inserted here -->
+                </div>
+                <button class="btn btn-clear" id="clearLeaderboard">
+                    <span class="btn-icon">🗑️</span>
+                    <span class="btn-text">Hapus Semua</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

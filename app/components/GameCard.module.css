@@ -1,0 +1,225 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-cyan);
+}
+
+[data-theme="dark"] .card:hover {
+    box-shadow: 0 10px 40px rgba(0, 255, 255, 0.15);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Accent color variations */
+.card[data-accent="cyan"] .icon {
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
+.card[data-accent="magenta"] .icon {
+    color: var(--neon-magenta);
+    filter: drop-shadow(0 0 8px var(--neon-magenta));
+}
+
+.card[data-accent="lime"] .icon {
+    color: var(--neon-lime);
+    filter: drop-shadow(0 0 8px var(--neon-lime));
+}
+
+.card[data-accent="yellow"] .icon {
+    color: var(--neon-yellow);
+    filter: drop-shadow(0 0 8px var(--neon-yellow));
+}
+
+.iconWrapper {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover .iconWrapper {
+    transform: scale(1.05);
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+    transition: all 0.3s ease;
+}
+
+.card:hover .icon {
+    transform: scale(1.1);
+}
+
+.content {
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.badgeNew,
+.badgeHot {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badgeNew {
+    background: rgba(57, 255, 20, 0.2);
+    color: var(--neon-lime);
+    border: 1px solid var(--neon-lime);
+}
+
+.badgeHot {
+    background: rgba(255, 0, 255, 0.2);
+    color: var(--neon-magenta);
+    border: 1px solid var(--neon-magenta);
+}
+
+.badgeIcon {
+    width: 12px;
+    height: 12px;
+}
+
+.description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.highScore {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    width: fit-content;
+}
+
+.scoreLabel {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.scoreValue {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: var(--neon-cyan);
+}
+
+.playButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.card:hover .playButton {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.playIcon {
+    width: 16px;
+    height: 16px;
+}
+
+.arrowIcon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .arrowIcon {
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 1.25rem;
+    }
+
+    .iconWrapper {
+        width: 60px;
+        height: 60px;
+    }
+
+    .icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .title {
+        font-size: 1.1rem;
+    }
+}

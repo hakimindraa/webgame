@@ -1,0 +1,244 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal {
+    background: var(--bg-card);
+    border: 2px solid var(--neon-cyan);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+[data-theme="dark"] .modal {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255, 0, 255, 0.2);
+    color: var(--neon-magenta);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.closeBtn:hover {
+    background: var(--neon-magenta);
+    color: #000;
+}
+
+.title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Steps */
+.stepsContainer {
+    margin-bottom: 1.5rem;
+}
+
+.stepIndicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stepDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.stepDot.active {
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    transform: scale(1.2);
+}
+
+.stepDot.completed {
+    background: var(--neon-lime);
+    border-color: var(--neon-lime);
+}
+
+.stepContent {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    min-height: 150px;
+}
+
+.stepIcon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+}
+
+.stepTitle {
+    font-size: 1.1rem;
+    color: var(--neon-cyan);
+    margin-bottom: 0.5rem;
+}
+
+.stepDescription {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.stepNavigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.navBtn {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navBtn:hover:not(.disabled) {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+
+.navBtn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.stepCounter {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Controls Section */
+.controlsSection {
+    margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+    font-size: 0.9rem;
+    color: var(--neon-yellow);
+    margin-bottom: 0.75rem;
+}
+
+.controlsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.controlGroup {
+    background: var(--bg-secondary);
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+}
+
+.controlLabel {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.controlList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.controlList li {
+    margin-bottom: 0.25rem;
+}
+
+/* Tips Section */
+.tipsSection {
+    margin-bottom: 1.5rem;
+}
+
+.tipsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tipsList li {
+    padding: 0.5rem 0.75rem;
+    background: rgba(57, 255, 20, 0.1);
+    border-left: 3px solid var(--neon-lime);
+    margin-bottom: 0.5rem;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Start Button */
+.startBtn {
+    width: 100%;
+    padding: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid var(--neon-cyan);
+    border-radius: var(--border-radius);
+    color: var(--neon-cyan);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.startBtn:hover {
+    background: var(--neon-cyan);
+    color: #000;
+}
+
+@media (max-width: 480px) {
+    .modal {
+        padding: 1rem;
+    }
+
+    .controlsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .stepContent {
+        padding: 1rem;
+        min-height: 130px;
+    }
+
+    .stepIcon {
+        font-size: 2.5rem;
+    }
+}

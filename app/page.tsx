@@ -1,65 +1,205 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
+import { TrophyIcon as Trophy, BellAlertIcon, MoonIcon, DevicePhoneMobileIcon } from '@heroicons/react/24/outline';
+import GameCard from './components/GameCard';
+import {
+  SnakeIcon,
+  BlockBlastIcon,
+  FlappyBirdIcon,
+  DodgeIcon,
+  MemoryIcon,
+  QuizIcon,
+  GamepadIcon,
+  TrophyIcon,
+  AchievementIcon
+} from './components/GameIcons';
+import { getHighScore, getStats, getAchievements } from './lib/storage';
+import styles from './page.module.css';
+
+const GAMES = [
+  {
+    id: 'snake',
+    title: 'Neon Snake',
+    description: 'Klasik snake game dengan tema neon! Makan makanan, hindari rintangan.',
+    Icon: SnakeIcon,
+    href: '/games/snake',
+    isPopular: true,
+    accentColor: 'lime',
+  },
+  {
+    id: 'block-blast',
+    title: 'Block Blast',
+    description: 'Puzzle game seru! Tempatkan blok untuk mengisi baris/kolom.',
+    Icon: BlockBlastIcon,
+    href: '/games/block-blast',
+    accentColor: 'magenta',
+  },
+  {
+    id: 'flappy-bird',
+    title: 'Flappy Bird',
+    description: 'Terbang melewati pipa! Tap untuk mengepakkan sayap.',
+    Icon: FlappyBirdIcon,
+    href: '/games/flappy-bird',
+    isNew: true,
+    accentColor: 'yellow',
+  },
+  {
+    id: 'dodge-game',
+    title: 'Dodge Game',
+    description: 'Hindari rintangan yang jatuh sebanyak mungkin!',
+    Icon: DodgeIcon,
+    href: '/games/dodge-game',
+    isNew: true,
+    accentColor: 'cyan',
+  },
+  {
+    id: 'memory-game',
+    title: 'Memory Game',
+    description: 'Cocokkan pasangan kartu dengan ingatan terbaik!',
+    Icon: MemoryIcon,
+    href: '/games/memory-game',
+    isNew: true,
+    accentColor: 'magenta',
+  },
+  {
+    id: 'quiz-game',
+    title: 'Quiz Game',
+    description: 'Jawab pertanyaan dan uji pengetahuanmu!',
+    Icon: QuizIcon,
+    href: '/games/quiz-game',
+    isNew: true,
+    accentColor: 'lime',
+  },
+];
 
 export default function Home() {
+  const [highScores, setHighScores] = useState<Record<string, number>>({});
+  const [stats, setStats] = useState({ totalGamesPlayed: 0, totalScore: 0, powerupsCollected: 0 });
+  const [achievementCount, setAchievementCount] = useState({ unlocked: 0, total: 0 });
+
+  useEffect(() => {
+    // Load high scores for each game
+    const scores: Record<string, number> = {};
+    GAMES.forEach((game) => {
+      scores[game.id] = getHighScore(game.id);
+    });
+    setHighScores(scores);
+
+    // Load stats
+    setStats(getStats());
+
+    // Load achievement count
+    const achievements = getAchievements();
+    setAchievementCount({
+      unlocked: achievements.filter((a) => a.unlockedAt).length,
+      total: achievements.length,
+    });
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className={styles.page}>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <div className={styles.heroLogo}>
+            <GamepadIcon size={64} className={styles.heroIcon} />
+          </div>
+          <h1 className={styles.heroTitle}>
+            <span className="neon-text cyan">NEON</span>
+            <span className="neon-text magenta">ARCADE</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className={styles.heroSubtitle}>
+            Platform gaming dengan gaya cyberpunk! Mainkan game-game seru dan raih skor tertinggi.
           </p>
+
+          {/* Quick Stats */}
+          <div className={styles.quickStats}>
+            <div className={styles.statItem}>
+              <GamepadIcon size={20} className={styles.statIcon} />
+              <span className={styles.statValue}>{stats.totalGamesPlayed}</span>
+              <span className={styles.statLabel}>Games Played</span>
+            </div>
+            <div className={styles.statItem}>
+              <AchievementIcon size={20} className={styles.statIcon} />
+              <span className={styles.statValue}>{achievementCount.unlocked}/{achievementCount.total}</span>
+              <span className={styles.statLabel}>Achievements</span>
+            </div>
+            <div className={styles.statItem}>
+              <TrophyIcon size={20} className={styles.statIcon} />
+              <span className={styles.statValue}>{GAMES.length}</span>
+              <span className={styles.statLabel}>Games Available</span>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Floating Decorations */}
+        <div className={styles.floatingIcons}>
+          <GamepadIcon size={32} className={`${styles.floatIcon} ${styles.floatIcon1}`} />
+          <TrophyIcon size={28} className={`${styles.floatIcon} ${styles.floatIcon2}`} />
+          <AchievementIcon size={26} className={`${styles.floatIcon} ${styles.floatIcon3}`} />
+          <SnakeIcon size={30} className={`${styles.floatIcon} ${styles.floatIcon4}`} />
         </div>
-      </main>
+      </section>
+
+      {/* Games Section */}
+      <section className={styles.gamesSection}>
+        <div className="container">
+          <h2 className={styles.sectionTitle}>
+            <GamepadIcon size={28} className={styles.sectionIcon} />
+            Choose Your Game
+          </h2>
+
+          <div className="game-grid">
+            {GAMES.map((game) => (
+              <GameCard
+                key={game.id}
+                title={game.title}
+                description={game.description}
+                Icon={game.Icon}
+                href={game.href}
+                highScore={highScores[game.id]}
+                isNew={game.isNew}
+                isPopular={game.isPopular}
+                accentColor={game.accentColor}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className={styles.featuresSection}>
+        <div className="container">
+          <h2 className={styles.sectionTitle}>
+            <AchievementIcon size={28} className={styles.sectionIcon} />
+            Platform Features
+          </h2>
+
+          <div className={styles.featuresGrid}>
+            <div className={styles.featureCard}>
+              <Trophy className={styles.featureIcon} />
+              <h3>Local Leaderboard</h3>
+              <p>Simpan dan lacak skor tertinggi Anda</p>
+            </div>
+            <div className={styles.featureCard}>
+              <BellAlertIcon className={styles.featureIcon} />
+              <h3>Achievements</h3>
+              <p>Unlock badge dan pencapaian</p>
+            </div>
+            <div className={styles.featureCard}>
+              <MoonIcon className={styles.featureIcon} />
+              <h3>Dark/Light Mode</h3>
+              <p>Pilih tema sesuai preferensi</p>
+            </div>
+            <div className={styles.featureCard}>
+              <DevicePhoneMobileIcon className={styles.featureIcon} />
+              <h3>Mobile Ready</h3>
+              <p>Main di laptop atau handphone</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

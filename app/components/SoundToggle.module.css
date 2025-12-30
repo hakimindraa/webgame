@@ -1,0 +1,107 @@
+.container {
+    position: relative;
+}
+
+.mainButton {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mainButton:hover {
+    border-color: var(--neon-cyan);
+    transform: scale(1.1);
+}
+
+.soundIcon {
+    width: 22px;
+    height: 22px;
+    color: var(--neon-cyan);
+    transition: all 0.3s ease;
+}
+
+.soundIconMuted {
+    width: 22px;
+    height: 22px;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.mainButton:hover .soundIcon {
+    filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
+.menuLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menuIcon {
+    width: 16px;
+    height: 16px;
+}
+
+.menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    min-width: 150px;
+    z-index: 100;
+}
+
+[data-theme="dark"] .menu {
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.menuItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.menuItem:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.toggleBtn {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggleBtn.on {
+    background: rgba(57, 255, 20, 0.2);
+    border-color: var(--neon-lime);
+    color: var(--neon-lime);
+}
+
+.toggleBtn.off {
+    background: rgba(255, 0, 255, 0.2);
+    border-color: var(--neon-magenta);
+    color: var(--neon-magenta);
+}
+
+.toggleBtn:hover {
+    transform: scale(1.05);
+}

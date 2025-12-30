@@ -1,0 +1,403 @@
+.page {
+    padding: 1rem;
+    min-height: calc(100vh - var(--navbar-height) - 100px);
+    overflow-x: hidden;}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.backButton {
+    position: absolute;
+    left: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.backButton:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+}
+
+.title {
+    font-size: 2rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Score Panel */
+.scorePanel {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+[data-theme="dark"] .scorePanel {
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.scoreItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.scoreLabel {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.scoreValue {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+}
+
+[data-theme="dark"] .scoreValue {
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* Powerup Status */
+.powerupStatus {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-card);
+    border: 2px solid var(--neon-yellow);
+    border-radius: var(--border-radius);
+    animation: pulseBorder 1s infinite;
+}
+
+@keyframes pulseBorder {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(255, 255, 0, 0.6);
+    }
+}
+
+.powerupIcon {
+    font-size: 1.5rem;
+}
+
+.powerupTimer {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--neon-yellow);
+}
+
+/* Canvas */
+.canvasWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 400px;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    border: 3px solid var(--neon-cyan);
+}
+
+[data-theme="dark"] .canvasWrapper {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+.canvasWrapper canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
+}
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(5, 5, 16, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+.overlayContent {
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.overlayTitle {
+    font-size: 1.75rem;
+}
+
+.overlaySubtitle {
+    color: var(--text-secondary);
+}
+
+/* Buttons */
+.difficultyButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.btn {
+    padding: 0.875rem 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btnEasy {
+    background: rgba(57, 255, 20, 0.1);
+    border-color: var(--neon-lime);
+    color: var(--neon-lime);
+}
+
+.btnEasy:hover {
+    background: var(--neon-lime);
+    color: #000;
+}
+
+.btnMedium {
+    background: rgba(255, 255, 0, 0.1);
+    border-color: var(--neon-yellow);
+    color: var(--neon-yellow);
+}
+
+.btnMedium:hover {
+    background: var(--neon-yellow);
+    color: #000;
+}
+
+.btnHard {
+    background: rgba(255, 0, 255, 0.1);
+    border-color: var(--neon-magenta);
+    color: var(--neon-magenta);
+}
+
+.btnHard:hover {
+    background: var(--neon-magenta);
+    color: #000;
+}
+
+.btnResume,
+.btnRestart {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+
+.btnResume:hover,
+.btnRestart:hover {
+    background: var(--neon-cyan);
+    color: #000;
+}
+
+.controlsInfo {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* Final Score */
+.finalScore {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.finalScoreLabel {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.finalScoreValue {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--neon-cyan);
+}
+
+[data-theme="dark"] .finalScoreValue {
+    text-shadow: 0 0 20px var(--neon-cyan);
+}
+
+.newHighscore {
+    animation: celebrate 0.5s ease infinite alternate;
+}
+
+@keyframes celebrate {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+/* D-Pad */
+.dpadContainer {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.dpadMiddle {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.dpadBtn {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: var(--bg-card);
+    border: 2px solid var(--neon-cyan);
+    border-radius: var(--border-radius);
+    color: var(--neon-cyan);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.dpadBtn:active {
+    background: var(--neon-cyan);
+    color: #000;
+    transform: scale(0.95);
+}
+
+.dpadCenter {
+    background: var(--bg-primary);
+    border-color: var(--text-muted);
+    color: var(--text-muted);
+    cursor: default;
+}
+
+/* Game Controls */
+.gameControls {
+    display: flex;
+    gap: 1rem;
+}
+
+.controlBtn {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.controlBtn:hover {
+    border-color: var(--neon-cyan);
+}
+
+/* Legend */
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .backButton {
+        position: static;
+        margin-right: auto;
+    }
+
+    .header {
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    .dpadContainer {
+        display: flex;
+    }
+
+    .overlayTitle {
+        font-size: 1.4rem;
+    }
+
+    .overlayContent {
+        padding: 1rem;
+    }
+
+    .finalScoreValue {
+        font-size: 2.5rem;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .dpadContainer {
+        display: flex;
+    }
+}
